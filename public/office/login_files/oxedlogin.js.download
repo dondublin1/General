@@ -1,0 +1,681 @@
+/* ID:			oxedlogin.js
+ * Author: 		Joseph Hurtado
+ * Description: This is the jQuery powered AJAX that validates and submits the form; 
+ it even does the redirect to the target.
+ * Version: 	RC 6.21 Added cosmetic cluetip changes.
+ RC 6.2 Adding Secure Login and checks for 3 use cases.
+ Updated on PHP side only, very minor changes here. Hanldes user@domain.com
+ * 				RC 6.0 Will include effects to display transitions better.
+ * jQuery:		Version-> 1.2.6 min // minified is the full text but tightened, Apache will deflate it
+ * 				File-> jquery.js // always the same filename, version info here only.
+ * jQuery UI:	RC 6.0 will use
+ * 				Version->jQuery UI 1.5.2
+ * 				File->  min; like jquery, so only text tight, and Apache deflate
+ * Description:	AJAX main file, it does ED redirect including cookie handling,
+ * 				regarding OX it does the whole Login Authentication and redirect
+ * DEBUG:		Search for REDIRECT-POINT to stop the redirect or allow it.
+ * Upgrade:		To add text effects to error messages so that transitions are obvious and not instant.
+ */
+
+// GLOBAL PARAMS
+var file			=	'oxedlogin.submit.html';  //php page that outputs the HTML, captured by AJAX here
+// var file			=	'WRONG.submit.html'; // used for error testing
+var waitholder		=	'#err'; // top div in login.html
+var waitnote		=	'<img alt="" src="css/wait.gif" /><br />Please Wait ...';
+var placeholder		=	'#err';  // content div in login.html; was #wrapper
+
+function createCookie(name,value,days) {
+  if (days) {
+    var date = new Date();
+    date.setTime(date.getTime()+(days*24*60*60*1000));
+    var expires = "; expires="+date.toGMTString();
+  }
+  else var expires = "";
+  document.cookie = name+"="+value+expires+"; path=/";
+}
+// jQuery Init. must happen first, since we are doing everything inside jQuery
+$(document).ready(function()
+{
+  cookieTest();
+  errorTest();
+
+  // FIRST LOAD FORM
+
+  // Step 1: jsonprint
+  // AJAX SUBMIT OPTIONS USING JSON
+  // url is file = oxedlogin.submit.html
+  // FilterForm is the JS code to validate the form fields
+  // ShowResult is the JS code to show the success or not of the call
+  // timeout is in milliseconds
+  $("#nameuser").focus();
+
+  $("#nameuser").cluetip({ arrows: true,
+      attribute:        'rel',
+      showTitle: false,
+      positionBy: 'fixed',
+      topOffset: 4, // 4 almost aligned to the top, 35 below
+      leftOffset: 5,  // -450 places it to the left, 5 places to the right, -300 below
+      width: 215,  // was 182, updated to accomodate long domains and IE 7 / 6 rendering.
+      dropShadowSteps:  3
+
+    }
+  ); // 35,-170 below the name; 4,5 top right;
+
+  // make sure ED is fully logged off and no expiration errors are sent
+  var domainTo = document.domain;
+  document.cookie = 'ID=gone; expires=Thu, 2 Aug 1970 20:47:11 UTC; path=/edgedesk/cgi-bin/';
+  document.cookie = 'ID=gone; domain=.' + domainTo + '; expires=Thu, 2 Aug 1970 20:47:11 UTC; path=/edgedesk/cgi-bin/';
+  document.cookie = 'TID=gone; domain=.' + domainTo + '; expires=Thu, 2 Aug 1970 20:47:11 UTC; path=/edgedesk/cgi-bin/';
+
+
+  // Destroy old session cookie to ensure we log in into OX
+  // var d = new Date(); document.cookie = "v0=1;expires=" + d.toGMTString() + ";" + ";";
+  // NEW INFO: ACCORDING TO BEENY WE SHOULD NOT DELETE THIS COOKIE FOR VERY UNIQUE NETSOL REASONS
+  //document.cookie ='JSESSIONID=gone; expires=Thu, 2 Aug 1970 20:47:11 UTC; path=/';
+
+  /* beforeSubmit: Filterform ==>
+   * method mentioned below in AJAX call, it can be used for additional input live
+   * checks before form submit; but we opted for server side checking only now.
+   */
+
+  var options = {
+    // beforeSubmit:	FilterForm,
+    beforeSubmit:		cookieTest,
+    success:		ShowResult,
+    //target:		target, NOT USED HERE BUT IT COULD BE ANY DOM element
+    url:			file,
+    type:      		'POST',
+    dataType:  		'json',
+    clearForm: 		false,
+    resetForm: 		false,
+    timeout:   		7000,
+    error:			function(data)
+    {
+      $(waitholder).effect("highlight", { color: '#99F000' }, 1000).html("<font color=#FF0000>Invalid user or password</font>").slideDown('slow');
+    }
+  };
+
+
+  ffconsole("Step 1 before ajaxform submit. ");
+
+  // AJAX CALL TO SUBMIT FORM using options above, so a POST to url: edoxlogin.submit.html is done
+  $('#ajaxform').ajaxForm(function() {
+    $('#ajaxform').ajaxSubmit(options);//return false;
+  });
+
+  // MAKE CLICKING ON SECURE CHECKBOX TAKE USER TO NSE, IF NECESSARY
+  var checkbox = $('#securecheck');
+  var secureProtocol = !!(document.location.protocol == 'https:');
+  var mailDotRegEx = /^mail/i;
+  var mailDotFound = mailDotRegEx.test(document.domain);
+  var webmailDomainFound = ((document.domain == 'webmail.networksolutionsemail.com') || (document.domain == 'webmail04.register.com') || (document.domain == 'webmail7.web.com'));
+  //alert(webmailDomainFound);
+  var isSecure = !!((secureProtocol && mailDotFound) || (secureProtocol && webmailDomainFound));
+  checkbox.attr('checked', isSecure);
+
+  checkbox.bind("click", function() {
+    var nameuser = ($('#nameuser').val());
+    var domain_name = ($('#domain_name').val());
+    var secure_url = document.getElementById('secure_url').value;
+    if ($(this).is(':checked') && !isSecure) { //Go from non-secure to secure.
+      //Also submit the current domain name to the new page.
+      window.location.href = 'https://'+secure_url+'/interfaces/sso/login.html'+'?nameuser='+nameuser+'&user_domain='+domain_name;
+    } else if ((!$(this).is(':checked')) && isSecure) { //Go from secure to non-secure.
+      if(domain_name != null && domain_name.length > 7) {
+        window.location.href = 'http://' + domain_name + '/interfaces/sso/login.html'+'?nameuser='+nameuser+'&user_domain='+domain_name;
+      } else {
+        window.location.href = 'http://' + document.domain + '/interfaces/sso/login.html'+'?nameuser='+nameuser+'&user_domain='+domain_name;
+      }
+    }
+  });
+});// close for jQuery lambda loop
+
+
+
+
+// SHOW RESULT FROM ORIGINAL LOGIG, THIS ONE DOES THE REDIRECTION AND THE STATUS REPORT
+// ON AUTHENTICATION, TO OX OR TO ED.
+function ShowResult(data)
+{
+
+  ffconsole("Showresult");
+  var domainVal3=document.domain;
+  var match3 = domainVal3.match(/web.com|networksolutionsemail.com/gi);
+  //alert(match3);
+  if (match3)
+  {
+    $('#signin-message').html("").show();
+  }
+  else {
+    $(waitholder).html(data.title).slideDown('slow');
+  }
+  //$(waitholder).html().slideDown('slow');
+  if (data.succes ==true)
+  {
+    //weak password redirect
+    if (data.weak == true){
+      window.location.href = 'http://' + document.domain + '/interfaces/sso/passwd_reset/enforce_reset.html?u=' + data.u + '&h=' + data.h;
+      return -1;
+    }
+
+    if (data.suspended == 'true'){
+      window.location.href = 'http://' + document.domain + '/interfaces/sso/suspended.html';
+      return -1;
+    }
+
+    // $(placeholder).html(data.content).slideDown('fast');
+
+    var edoxlogto=data.content; // data.content contains the full URL to redirect to for EdgeDesk
+    ffconsole (edoxlogto);
+
+
+    // before doing the actual redirection, send the id cookie to ED if appropriate
+    // ED auth is done on the server, redirection is done on the client.
+    if (data.edflag == true)
+    { // id cookie must be set to the session id
+      //start EDGEDESK EMMAINT-2327
+      var contentStr=data.content.split('&');
+      var mboxStr=contentStr[2].split('=');
+      var channelName=location.host;
+      $.ajax({
+        data: 'mailbox_name='+mboxStr[1]+'&mailbox_type=EDGEDESK'+'&success=true',
+        url: '/interfaces/sso/logmailbox.html',
+        method: 'GET',
+        success: function(msg) {
+        }
+      });
+      //end EDGEDESK EMMAINT-2327
+
+      edSession = data.session;
+      //setCookie("ID", edSession, null, '/');
+      setCookie("ID", edSession, "." + document.domain, '/edgedesk/cgi-bin/');
+
+      ffconsole("edflag was true, and ED's session id is ",edSession);
+      // additional info for DB4 status, we assume ED even if read errors detected
+      var db4stat = data.db4status; // no errors we report 'OK'
+      ffconsole("DB4 Status",db4stat);
+
+      // REDIRECT-POINT stop the redirect below if you want:
+      window.location.href = edoxlogto;
+
+      /* Alternative redirect method, using a delay:
+       * setTimeout(function(){window.location.href = edoxlogto;  }, 2500);
+       */
+
+    }
+    else if (data.promailflag == true){
+      var myForm = document.createElement("form");
+      myForm.method="post";
+      myForm.action = "/promail/src/redirect.html";
+      var p = {"cleared_cookies":1,"js_autodetect_results":"SMPREF_JS_OFF","just_logged_in":1,"login_username":data.user,"secretkey":data.pwd}
+      for (var k in p) {
+        var myInput = document.createElement("input");
+        myInput.setAttribute("name", k);
+        myInput.setAttribute("value", p[k]);
+        myForm.appendChild(myInput);
+      }
+      document.body.appendChild(myForm);
+      myForm.submit();
+      document.body.removeChild(myForm);
+      //start PROMAIL EMMAINT-2327
+      channelName=location.host;
+      $.ajax({
+        data: 'mailbox_name='+data.user+'&mailbox_type=PROMAIL'+'&success=true',
+        url: '/interfaces/sso/logmailbox.html',
+        method: 'GET',
+        success: function(msg) {
+        }
+      });
+      //end PROMAIL EMMAINT-2327
+    }
+
+    // APP steps for MegaMail.
+    else if (data.MegaMailflag == true)
+    {
+      MegaMailflagprint = data.MegaMailflag;
+      ffconsole ('MegaMail Flag was true, doing client jSON Authentication', MegaMailflagprint);
+
+      var MegaMailuser=data.userMegaMail;
+      var MegaMailpwd=data.pwdMegaMail;
+      //ffconsole ('MMailuser and MMailpwd sent from the PHP form are: ',MegaMailuser,MegaMailpwd);
+
+
+      var currentDomain= document.domain;
+      //var MegaMailurl = 'http://'+document.domain+'/megamail/api/authenticate';
+      //var MegaMailurl = 'http://'+document.domain+'/mm/api/authenticate';
+      var MegaMailurl = document.location.protocol + '//'+document.domain+'/mm/api/authenticate';
+      var AuthData = {
+        mailbox: MegaMailuser.toLowerCase(),
+        password: MegaMailpwd
+      };
+
+      //console.log("APP->: Authdata = ", AuthData);
+      //console.log("APP->: Authdata.stringify = " + JSON.stringify(AuthData));
+
+      //ffconsole('APP-> MegaMail URL Request will be:',MegaMailurl,'Before the MegaMail Client authentication call');
+
+      $.ajax({
+        type: 'POST',
+        url: MegaMailurl,
+        dataType: 'json',
+        data: JSON.stringify(AuthData),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        error: function (data)
+        {
+          //$(waitholder).effect("highlight", { color: '#99F000' }, 1000).html("<font color=#FF0000>Invalid user or password</font>").slideDown('slow');
+          //$('#signin-message').html("Invalid user or password").show();
+
+          var domainVal2b=document.domain;
+          var mboxname = document.ajaxform.nameuser.value;
+          var mboxval=domainVal2b.split('.');
+          var mboxdomain=mboxval[1] + '.' + mboxval[2];
+          $.ajax({
+            data: 'mailbox_name='+mboxname+'@'+mboxdomain+'&mailbox_type=MEGAMAIL'+'&success=false',
+            url: '/interfaces/sso/logmailbox.html',
+            method: 'GET',
+            success: function(msg) {
+            }
+          });
+          var match2b = domainVal2b.match(/web.com|networksolutionsemail.com/gi);
+          if (match2b)
+          {
+            $('#signin-message').html("Invalid user or password").show();
+            $("#nameuser").focus();
+          }
+          else
+          {
+            $(waitholder).effect("highlight", { color: '#99F000' }, 1000).html("<font color=#FF0000>Invalid user or password</font>").slideDown('slow');
+          }
+        },
+        success: function (data)
+        {
+          //start MEGAMAIL EMMAINT-2327
+          channelName=document.domain;
+          $.ajax({
+            data: 'mailbox_name='+MegaMailuser+'&mailbox_type=MEGAMAIL'+'&success=true',
+            url: '/interfaces/sso/logmailbox.html',
+            method: 'GET',
+            success: function(msg) {
+            }
+          });
+          //end MEGAMAIL EMMAINT-2327
+
+          //ffconsole ('APP-> Inside MegaMail Client authentication success, we got-->:',data.session, data.random);
+          var MegaMailSession=data.session;
+          var MegaMailRandom=data.random;
+          var currentDomain= document.domain;
+
+          if (window.console) {
+            window.console.log('Current domain is: ');
+            window.console.log(currentDomain);
+          }
+
+
+          var MegaMailError=true;
+          if (MegaMailError==false)
+          {
+            // update the screen and redirect to login again
+            $(waitholder).effect("highlight", { color: '#99F000' }, 1000).html("<font color=#FF0000>Wrong user or password</font>").slideDown('slow');
+            //ffconsole('jQuery: MegaMail Authentication Error ');
+
+          }
+          else
+          {
+            // no errors! just continue and log into OX
+            //ffconsole('jQuery: No MegaMailAuthentication Errors, about to redirect');
+            ffconsole(document.location.protocol);
+
+            //	edoxlogto = document.location.protocol + '//' + currentDomain + '/authenticate';
+            //edoxlogto = 'http://' + currentDomain + '/megamail/email';
+            //edoxlogto = 'http://' + currentDomain + '/mm/email';
+            //edoxlogto = document.location.protocol + '/mm/email';
+            edoxlogto = '/mm/email#login';
+            ffconsole('About to redirect MMail to: ',edoxlogto);
+
+            // REDIRECT-POINT stop the redirect below if you want:
+            window.location.href=edoxlogto;
+          }
+
+        }
+      }); // end ajax call for Megamail
+    } // end MegaMail
+    // APP END OX steps for MegaMail
+
+    // OX AUTHENTICATION PIECE HERE
+    else if (data.oxflag == true)
+    {
+      oxflagprint = data.oxflag;
+      appsuiteflagprint=data.appsuiteflag;
+      //ffconsole ('OX Flag was true, doing client jSON Authentication', oxflagprint);
+
+      var oxuser=data.userox;
+      var oxpwd=data.pwdox;
+      //ffconsole ('oxuser and oxpwd sent from the PHP form are: ',oxuser,oxpwd);
+
+
+      // authentication piece to come
+      // ox update 1.1
+      var currentDomain= document.domain;
+//      alert(appsuiteflagprint);
+      // start EMMAINT-1897
+      // code added back for  EMMAINT-2107
+      if (appsuiteflagprint == 1)
+      {
+        var oxurl = '/ajax/login?action=login';
+        uiWebPathString='/ox6/index.html';
+//      alert(oxurl);
+      }
+      //if ( (appsuiteflagprint == 4) || (appsuiteflagprint == 1) )
+      if (appsuiteflagprint == 4)
+      {
+        var oxurl = '/ajax/login?action=login&client=open-xchange-appsuite';
+        uiWebPathString='/appsuite/';
+        //alert(oxurl);
+      }
+      // end EMMAINT-1897
+      // end EMMAINT-2107
+
+      //ffconsole('OX URL Request will be:',oxurl,'Before the OX Client authentication call');
+
+      $.ajax({
+        type: 'POST',
+        url: oxurl,
+        data: '&name='+oxuser.toLowerCase()+'&password='+encodeURIComponent(String(oxpwd)),
+        dataType: 'json',
+        error: function (data)
+        {
+          //				$(waitholder).effect("highlight", { color: '#99F000' }, 1000).html("<font color=#FF0000>APPD Unexpected login error, try again</font>").slideDown('slow');
+          $('#signin-message').html("Unexpected login error, please try again").show();
+          $("#nameuser").focus();
+        },
+        success: function (data)
+        {
+          //ffconsole ('Inside OX Client authentication, we got:',data.session, data.random);
+
+          var oxSession=data.session;
+          var oxRandom=data.random;
+          var currentDomain= document.domain;
+
+          if (window.console) {
+            window.console.log('Current domain is: ');
+            window.console.log(currentDomain);
+          }
+
+
+          var oxError=false; // set to true to display outage message for OX login
+          if (typeof oxSession == 'undefined')
+          {
+            oxError=true;
+            //ffconsole ('OxError Status inside IF oxSession is below',oxError);
+          }
+          if (typeof oxRandom=='undefined')
+          {
+            oxError=true;
+            //ffconsole ('OxError Status inside IF oxRandom is below',oxError);
+          }
+
+          //ffconsole('OxError Status after IF is below',oxError);
+
+
+          if (oxError==true)
+          {
+            // update the screen and redirect to login again
+            var domainVal4=document.domain;
+            var match4 = domainVal4.match(/web.com|networksolutionsemail.com/gi);
+            if (match4)
+            {
+              var mboxname = document.ajaxform.nameuser.value;
+              var mboxval=domainVal4.split('.');
+              var mboxdomain=mboxval[1] + '.' + mboxval[2];
+              $.ajax({
+                data: 'mailbox_name='+mboxname+'@'+mboxdomain+'&mailbox_type=OPENEXCHANGE'+'&success=false',
+                url: '/interfaces/sso/logmailbox.html',
+                method: 'GET',
+                success: function(msg) {
+                }
+              });
+
+              $('#signin-message').html("Invalid user or password").show();
+              $("#nameuser").focus();
+            }
+            else
+            {
+              $(waitholder).effect("highlight", { color: '#99F000' }, 1000).html("<font color=#FF0000>Invalid user or password</font>").slideDown('slow');
+
+              $("#nameuser").focus();
+            }
+            //ffconsole('jQuery: OX Authentication Error ');
+
+          }
+          else
+          {  // no errors! just continue and log into OX
+            //ffconsole('jQuery: No oxAuthentication Errors, about to redirect');
+
+            // cookie reading and parsing
+            // var oxSessionCookie= $.cookie ('JSESSIONID');
+            // ox update 1.5
+            oxCookieSessionId=getSessionIDFromJSESSIONCookie();
+            if (oxCookieSessionId==null) // error!
+            {
+              $(waitholder).effect("highlight", { color: '#99F000' }, 1000).html("<font color=#FF0000>Unexpected login error, try again</font>").slideDown('slow');
+            }
+            else
+            {
+
+              //ffconsole('JSESSIONID cookie value is: ', oxCookieSessionId);
+
+              edoxlogto = document.location.protocol + '//' + currentDomain + '/ajax/login;jsessionid='+oxCookieSessionId+'?action=redirect&random='+oxRandom+'&uiWebPath='+uiWebPathString;
+
+              //ffconsole('About to redirect to: ',edoxlogto);
+
+              // REDIRECT-POINT stop the redirect below if you want:
+//start OX redirect EMMAINT-2327
+              $.ajax({
+                data: 'mailbox_name='+oxuser+'&mailbox_type=OPENEXCHANGE'+'&success=true',
+                url: '/interfaces/sso/logmailbox.html',
+                method: 'GET',
+                success: function(msg) {
+                }
+              });
+//END OX redirect EMMAINT-2327
+
+              window.location.href=edoxlogto;
+
+
+            }
+
+          }
+
+        }
+      });
+    }
+
+  } // endif data.succes == true
+  else // meaning data.succes == false
+  {
+
+
+    var errorString=data.title; // we might get an error message from singlesignon.html
+    var domainVal=document.domain;
+    var match = domainVal.match(/web.com|networksolutionsemail.com/gi);
+    ffconsole('IF error in status sent, message was:');
+    ffconsole(data.title);
+
+    if (typeof errorString != 'undefined')
+    {
+      if (match)
+      {
+        var match2 = errorString.match(/Session/gi);
+        if (match2) {
+		  
+		  $.post( "remove_cookies.html", function( data ) {
+			console.log("cookies were removed");
+		  });
+		  
+          $('#signin-message').html("Session expired please refresh the page and try again").show();
+          $("#nameuser").focus();
+        } else {
+          var mboxname = ($('#nameuser').val());
+          var domainstr = ($('#domain_name').val());
+          var mboxval=domainstr.split('.');
+          var mboxdomain=mboxval[1] + '.' + mboxval[2];
+          $.ajax({
+            data: 'mailbox_name='+mboxname+'@'+mboxdomain+'&mailbox_type=EDGEDESK'+'&success=false',
+            url: '/interfaces/sso/logmailbox.html',
+            method: 'GET',
+            success: function(msg) {
+            }
+          });
+
+          $('#signin-message').html("Invalid user or password").show();
+          $("#nameuser").focus();
+        }
+      }
+      else
+      {
+        $(waitholder).effect("highlight", { color: '#99F000' }, 1000).html(errorString).slideDown('slow');
+      }
+
+    }
+    else{
+      // a catch all for any other error
+      $(waitholder).effect("highlight", { color: '#99F000' }, 1000).html("<font color=#FF0000>Login not valid, please try again</font>").slideDown('slow');
+
+    }
+
+
+
+  }
+
+
+}
+
+
+// WAIT MESSAGE
+function wait(){
+
+  // firebug
+  ffconsole('Wait');
+
+  $(waitholder).html(waitnote).fadeIn('fast');
+}
+
+function pause(millis){
+  var date = new Date();
+  var curDate = null;
+
+  do {
+    curDate = new Date();
+  }
+  while (curDate - date < millis);
+}
+
+
+
+// CLEAR WAIT MESSAGE
+function wipe(){
+  $(waitholder).fadeOut('fast').html('');
+}
+
+
+
+// VALIDATION
+function FilterForm(formData, jqForm, options)
+{
+  $(waitholder).html(waitnote).fadeIn('fast');
+  for (var i=0; i < formData.length; i++)
+  {
+    wait();
+    switch(formData[i].name)
+    {
+      case 'nameuser':
+        if(!formData[i].value.length)
+        {
+          $(waitholder).html('Username required').slideDown('slow');
+          return false;
+        }
+        break;
+      case 'passuser':
+        var len = formData[i].value.length;
+        if(len<3||len>50)
+        {
+          $(waitholder).html('Password required').slideDown('slow');
+          return false;
+        }
+        break;
+    }
+  }
+
+}
+
+
+
+var firstTime = 1;
+function cookieTest(formData, jqForm, options)
+{
+  wipe();
+
+  /* Test cookie */
+  var date = new Date; // Generic JS date object
+  var unixtime = parseInt(date.getTime() / 1000);
+  jQuery.cookie('cookie_check', unixtime);
+  get_unixtime = jQuery.cookie('cookie_check');
+  if (unixtime != get_unixtime)
+  {
+    var errmsg;
+
+    if (firstTime)
+      errmsg = "Please enable cookies in your browser's settings before logging in.";
+    else
+      errmsg = "Unable to log in. Please enable cookies in your browser's settings and try again.";
+    firstTime = 0;
+    $(waitholder).effect("highlight", { color: '#99F000' }, 1000).html("<font color=#FF0000>"+errmsg+"</font>").slideDown('slow');
+    return false;
+  }
+
+
+  return true;
+}
+function errorTest(){
+  var errCode = url_query('bl');
+  if (errCode == 1){
+    var domainVal2=document.domain;
+    var mboxname = document.ajaxform.nameuser.value;
+    var mboxval=domainVal2.split('.');
+    var mboxdomain=mboxval[1] + '.' + mboxval[2];
+    $.ajax({
+      data: 'mailbox_name='+mboxname+'@'+mboxdomain+'&mailbox_type=PROMAIL'+'&success=false',
+      url: '/interfaces/sso/logmailbox.html',
+      method: 'GET',
+      success: function(msg) {
+      }
+    });
+    var match2 = domainVal2.match(/web.com|networksolutionsemail.com/gi);
+    if (match2)
+    {
+      $('#signin-message').html("Invalid user or password").show();
+      $("#nameuser").focus();
+    }
+    else
+    {
+      $(waitholder).effect("highlight", { color: '#99F000' }, 1000).html("<font color=#FF0000>Invalid user or password</font>").slideDown('slow');
+    }
+    return false;
+  }
+}
+
+function url_query( query ) {
+  query = query.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+  var expr = "[\\?&]"+query+"=([^&#]*)";
+  var regex = new RegExp( expr );
+  var results = regex.exec( window.location.href );
+  if( results !== null ) {
+    return results[1];
+    return decodeURIComponent(results[1].replace(/\+/g, " "));
+  } else {
+    return false;
+  }
+}

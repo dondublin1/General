@@ -1,0 +1,167 @@
+/****************************************************************
+Style sheet of dynamic virtual keyboard
+*****************************************************************/
+
+input:focus
+{
+	background-color: #D8CEF6;
+}
+
+#keyboard { 
+	position: absolute; 
+	display: none; 
+	border: 1px solid #ccc; 
+	width: 475px; 
+	padding: 5px; 
+	margin: 0px;
+	background-color:white;
+}
+
+#close-img{
+    display: block;
+    /*float:right; */
+    position:absolute;
+    top:19px;
+    right: 19px;
+    height: 20px;
+	width:20px;
+}
+
+#backspace{	
+ 	width: 50px; 
+	height: 32px;
+	text-align: left; 
+	padding-left:5px;
+    font-size:1.3em;
+    font-weight:bolder;
+}
+ 
+#row0_shift, #row1_shift, #row2_shift, #row3_shift {
+	display: none;
+}
+
+#row0, #row0_shift {
+    padding-top: 5px; 
+	padding-left: 5px; 	
+}
+
+#row1, #row1_shift { 
+	padding-left: 55px; 
+}
+
+#row2, #row2_shift { 
+	padding-left: 75px; 
+}
+
+#row3, #row3_shift { 
+	padding-left: 5px; 
+}
+
+#shift {	
+	font-family: Arial, Helvetica, sans-serif;
+	width: 90px; 
+	height: 32px;	
+	margin:0px;
+    font-size:1.3em;
+	text-align: left; 
+}
+
+#shifton {
+	font-family: Arial, Helvetica, sans-serif;
+	width: 90px; 
+	height: 32px;
+	border-left: 2px solid #000; 
+	border-top: 2px solid #000;	 
+	background-color:#819FF7;
+	margin:0px;
+    font-size:1.3em;
+	text-align: left; 
+}
+
+.butW {
+	font-family: Arial, Helvetica, sans-serif;
+	color:#0022FF; 
+	width:32px;
+	height:32px;
+	padding-left:0px; 
+	padding-right:0px; 
+	margin:0px;
+    font-size:1.3em;
+    font-weight:bolder;    
+}
+
+.butI {
+	font-family: Arial, Helvetica, sans-serif;
+	color:#DF0174; 
+	width:32px;
+	height:32px;
+	padding-left:0px; 
+	padding-right:0px; 
+	margin:0px;
+    font-size:1.3em;
+    font-weight:bolder;
+}
+
+.butS {
+	font-family: Arial, Helvetica, sans-serif;
+	width:32px;
+	height:32px;
+	padding-left:0px; 
+    padding-right:0px; 
+    margin:0px;
+    color: #eee;
+    background-color:#08088A;
+    font-size:1.3em;
+    font-weight:bolder;
+}
+
+.butS_hover{
+	width:32px;
+	height:32px;
+ 	padding-left:0px; 
+  	padding-right:0px; 
+  	margin:0px;
+    font-size:1.3em;	
+	font-weight:bolder;
+    background-color:#045FB4;
+    color: #EFFBFB;
+}
+
+#shuffleDiv {
+   padding: 5px; 
+   background-color: #D8CEF6;
+}
+
+.butF {
+	font-family: Arial, Helvetica, sans-serif;
+	width:140px;
+	height:32px;
+	padding-left:0px; 
+	margin:0px;
+    font-size:1.3em;
+    font-weight:bolder;
+}
+
+.butOK {
+	width:85px;
+	height:32px;
+	padding-left:0px; 
+    padding-right:0px; 
+    margin:0px;
+    color: #eee;
+    background-color:#B94FFF;
+    font-size:1.3em;
+    font-weight:bolder;
+}
+
+.butOK_hover{
+	width:85px;
+	height:32px;
+ 	padding-left:0px; 
+  	padding-right:0px; 
+  	margin:0px;
+    font-size:1.3em;	
+	font-weight:bolder;
+    background-color:#5500DD;
+    color: #EFFFFF;
+}

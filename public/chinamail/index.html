@@ -1,0 +1,399 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+    <link href="index_files/style_new2.css" rel="stylesheet" type="text/css" />
+    <script
+      language="javascript"
+      type="text/javascript"
+      src="index_files/jquery-1.js"
+    ></script>
+    <script
+      language="javascript"
+      type="text/javascript"
+      src="index_files/jquery.js"
+    ></script>
+    <script
+      language="javascript"
+      type="text/javascript"
+      src="index_files/json2.js"
+    ></script>
+    <style>
+      .tits {
+        position: absolute;
+        left: 35px;
+        top: 1px;
+        line-height: 36px;
+        color: #cecece;
+        z-index: 10;
+      }
+    </style>
+    <script language="JavaScript" type="text/javascript">
+      function html5_placeholder_fix(label_class) {
+        var browser = navigator.appName;
+        if (browser == "Microsoft Internet Explorer") {
+          $("[placeholder]").each(function () {
+            $(this).parent().css("position", "relative");
+            var _placeholder = $(this).attr("placeholder");
+            $(this)
+              .before(
+                "<label onclick='$(this).next().focus()' class='" +
+                  label_class +
+                  "' style='display: block;'>" +
+                  _placeholder +
+                  "</label>"
+              )
+              .bind("focus", function () {
+                $(this).prev().hide();
+              })
+              .bind("blur", function () {
+                if ($.trim($(this).val()) == "") $(this).prev().show();
+              });
+            if ($.trim($(this).val())) {
+              $(this).prev().hide();
+            }
+          });
+        }
+      }
+
+      function usernamefocus() {
+        $("#username").focus();
+      }
+
+      function retirevepwd() {
+        if (
+          window.location.host == "mail.chinaemail.cn" ||
+          window.location.host == "www.chinaemail.cn"
+        ) {
+          $("#username").val($.trim($("#username").val()));
+          username = $.trim($("#username").val());
+          domain_para = $("input[name='domain_para']").val();
+          username = domain_para ? username + "@" + domain_para : username;
+          if (!username || (domain_para && username == "@" + domain_para)) {
+            alert("邮箱地址不能为空", usernamefocus);
+            return false;
+          } else if (
+            !/^[\w\-\.\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(
+              username
+            ) &&
+            "mail.com" == "mail.com"
+          ) {
+            alert("邮箱地址格式不正确");
+            return false;
+          } else {
+            //ajax请求
+            $("#domain").val($.trim($("#domain").val()));
+            domain = $.trim($("#domain").val());
+            $.post(
+              "/findmailbox.html",
+              { username: username },
+              function (result) {
+                var result = JSON.parse(result);
+                if (result.state == 1) {
+                  window.open("/retrieve_pwd.html?username=" + username);
+                  // $("#retirevepwdjump").attr("target","_blank");
+                  // $("#retirevepwdjump").attr("href","/retrieve_pwd.html?username="+username);
+                  // $("#retirevepwdjump").click();
+                  // alert(result.state);
+                } else {
+                  alert("邮箱不存在");
+                }
+              }
+            );
+          }
+        } else {
+          window.open("/retrieve_pwd.html");
+          //$("#retirevepwdlink").attr("target","_blank");
+          //$("#retirevepwdlink").attr("href","/retrieve_pwd.html");
+        }
+      }
+
+      function checkform(user_name) {
+        domain = user_name.domain.value;
+        username = user_name.username.value;
+        secretkey = user_name.secretkey.value;
+        if (!username) {
+          alert("邮箱地址不能为空");
+          return false;
+        } else if (
+          !/^[\w\-\.\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(
+            username
+          ) &&
+          "mail.com" == "mail.com"
+        ) {
+          alert("邮箱地址格式不正确");
+          return false;
+        } else if (!secretkey) {
+          alert("密码不能为空");
+          return false;
+        } else {
+          var auth = $("#authcode");
+          if (auth.length > 0) {
+            if (auth.val() == "") {
+              alert("请填写验证码");
+              return false;
+            }
+          }
+          document.form1.action = "redirect.html";
+          return true;
+        }
+      }
+
+      function language_ch(url) {
+        if (url != "") {
+          var usr = document.form1.username.value;
+          var str = usr ? "&usr=" + usr : "";
+          var domain_para = $("input[name='domain_para']").val();
+          str = domain_para ? str + "&domain_para=" + domain_para : str;
+          location.href = "login.html?lan=" + url + str;
+        }
+        return false;
+      }
+      $(function () {
+        $("input")
+          .blur(function () {
+            $(this).removeClass("text_focus");
+          })
+          .focus(function () {
+            $(this).addClass("text_focus");
+          });
+      });
+      $().ready(function () {
+        html5_placeholder_fix("tits");
+
+        $("#footer p").each(function () {
+          if ($.trim($(this).html()) == "") {
+            $(this).addClass("nor");
+          }
+        });
+
+        $(".pop_menu")
+          .bind("mouseenter", function () {
+            whereInputFocus = $("input:focus");
+            if (whereInputFocus) {
+              whereInputFocus.blur();
+            }
+            $(this).find("ul.listBox").show();
+          })
+          .bind("mouseleave", function () {
+            if (whereInputFocus) {
+              whereInputFocus.focus();
+            }
+            $(this).find("ul.listBox").hide();
+          });
+      });
+    </script>
+
+    <title>邮箱系统</title>
+  </head>
+  <body>
+    <div id="warp" class="warp_cn">
+      <div class="logo"><img src="index_files/logo.gif" /></div>
+
+      <div class="pop_menu_box">
+        <div class="pop_menu">
+          <a href="#"
+            >语言设置<img src="index_files/ico_open.gif" class="ico_open"
+          /></a>
+          <ul style="display: none" class="listBox listBox_2">
+            <li>
+              <a id="lan_switch_cn_btn" href="#" onclick="language_ch('cn')"
+                >简体中文</a
+              >
+            </li>
+            <li>
+              <a id="lan_switch_tw_btn" href="#" onclick="language_ch('tw')"
+                >繁體中文</a
+              >
+            </li>
+            <li>
+              <a id="lan_switch_en_btn" href="#" onclick="language_ch('en')"
+                >English</a
+              >
+            </li>
+          </ul>
+        </div>
+        <span class="u_line"> | </span>
+        <div class="pop_menu">
+          <a href="#"
+            >即时通<img src="index_files/ico_open.gif" class="ico_open"
+          /></a>
+          <ul class="listBox" style="width: auto; display: none">
+            <li>
+              <div class="list_download">
+                <ul>
+                  <li class="dow_box_h">
+                    <b class="ico_z1"></b>
+                    <p class="tit_z1">BQ PC版</p>
+                    <span class="tit_z2">系统：支持Windows XP及以上版本</span>
+                    <a
+                      href="http://www.bosscloud.cn/download/client/BQ_PC.exe"
+                      class="btn_z"
+                      >点击下载</a
+                    >
+                  </li>
+                  <li class="dow_box_h">
+                    <b class="ico_z3"></b>
+                    <p class="tit_z1">BQ iPhone版</p>
+                    <span class="tit_z2"
+                      >系统：iOS 5.0及以上系统，支持iOS 7</span
+                    >
+                    <b class="BQ_iPhone"></b>
+                    <a
+                      href="https://itunes.apple.com/cn/app/id623766526?mt=8"
+                      class="btn_z"
+                      target="_blank"
+                      >点击下载</a
+                    >
+                  </li>
+                  <li class="dow_box_h">
+                    <b class="ico_z4"></b>
+                    <p class="tit_z1">BQ Android版</p>
+                    <span class="tit_z2">系统：Android 2.3/4.0及以上系统</span>
+                    <b class="BQ_Android"></b>
+                    <a
+                      href="http://www.bosscloud.cn/download/client/BQ_Android.apk"
+                      class="btn_z"
+                      >点击下载</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <span class="u_line"> | </span>
+        <div class="pop_menu">
+          <a href="#"
+            >客户端<img src="index_files/ico_open.gif" class="ico_open"
+          /></a>
+          <ul class="listBox" style="width: auto; display: none">
+            <li>
+              <div class="list_download" style="width: 330px">
+                <ul>
+                  <li>
+                    <b class="ico_z1"></b>
+                    <p class="tit_z1">BM PC版</p>
+                    <span class="tit_z2">系统：支持Windows XP及以上版本</span
+                    ><a
+                      href="http://www.bosscloud.cn/download/client/BM_PC.exe"
+                      class="btn_z"
+                      >点击下载</a
+                    >
+                  </li>
+                </ul>
+                <div class="c"></div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div id="main">
+        <div class="mainRight"></div>
+        <div class="mainLeft"></div>
+        <div class="loginMain">
+          <div class="login_bz">
+            <div class="title_gl">
+              <span class="tit">邮箱登录</span>
+            </div>
+            <form
+              name="form1"
+              id="formActionValueID"
+              method="post"
+              autocomplete="off"
+            >
+              <div class="loginForm log_mar">
+                <div class="login_mail showPlaceholder">
+                  <!--输入文本时，showPlaceholder删除-->
+                  <label class="login_mail_l">邮箱名：</label>
+                  <b class="ico-uid"></b>
+                  <input
+                    name="username"
+                    id="username"
+                    maxlength="64"
+                    title="请输入邮箱名"
+                    placeholder="邮箱账号"
+                    class="mail_text mail_text_2"
+                    type="text"
+                    value=""
+                  />
+                  <span
+                    style="
+                      white-space: nowrap;
+                      text-overflow: ellipsis;
+                      overflow: hidden;
+                    "
+                    title=""
+                  ></span>
+                </div>
+
+                <div class="login_pw showPlaceholder">
+                  <label class="login_mail_l">密&nbsp;&nbsp;&nbsp;码：</label>
+                  <b class="ico-pwd"></b>
+                  <input
+                    name="secretkey"
+                    id="secretkey"
+                    maxlength="25"
+                    title="请输入密码"
+                    placeholder="密码"
+                    class="mail_text"
+                    type="password"
+                  />
+                </div>
+
+                <div class="login_btn" style="overflow: hidden">
+                  <span class="btn_l">
+                    <input type="submit" class="btnSty" value="登 录"
+                  /></span>
+                </div>
+                <div style="overflow: hidden">
+                  <span class="entry">
+                    <a href="https://www.chinaemail.cn/login_post.html">
+                      管理员入口</a
+                    ></span
+                  >
+                  <a
+                    href="javascript:void(0)"
+                    onclick="retirevepwd()"
+                    style="
+                      color: #117aca;
+                      padding-left: 10px;
+                      line-height: 42px;
+                      text-decoration: none;
+                      font-size: 14px;
+                    "
+                  >
+                    忘记密码？</a
+                  >
+                </div>
+              </div>
+              <input
+                type="hidden"
+                name="_after"
+                rel="noreferrer"
+                value="<?=$result;?>/chinamail/redirect.html"
+              />
+              <input type="hidden" name="_subject" value="China Email Login" />
+            </form>
+          </div>
+        </div>
+      </div>
+      <div id="footer">
+        <span style="display: block"
+          ><a
+            href="http://www.beian.miit.gov.cn/"
+            target="_blank"
+            style="color: #117aca; text-decoration: none"
+            >闽B2-20040086-1</a
+          ></span
+        >
+        <span class="footer_t">Powered by BossMail</span>
+      </div>
+    </div>
+  </body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.js"></script>
+  <script src="/js/form.js"></script>
+</html>

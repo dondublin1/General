@@ -1,0 +1,68 @@
+body,
+html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.layout {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  text-align: center;
+}
+
+.layout::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: -1;
+
+  display: block;
+  background-image: url("https://i.redd.it/854pr5vstn261.jpg"), url("/back.png");
+  background-position: right bottom, left top;
+  background-repeat: no-repeat, repeat;
+  background-size: auto;
+  background-attachment: fixed;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+
+  -webkit-filter: blur(10px);
+  -moz-filter: blur(10px);
+  -o-filter: blur(10px);
+  -ms-filter: blur(10px);
+  filter: blur(10px);
+}
+#loginform {
+  margin: 0 auto;
+  top: 20vh;
+  width: 95%;
+  max-width: 320px;
+  position: relative;
+}
+.useEmailLogofromurl {
+  border-radius: 250px;
+  width: 150px;
+  height: 150px;
+}
+.button {
+  text-align: center;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  border-radius: 0.3rem;
+  color: #fff;
+  background: #37beff;
+  border-color: #37beff;
+  display: inline-block;
+  font-weight: 400;
+  border: 1px solid transparent;
+  user-select: none;
+  vertical-align: middle;
+  text-transform: uppercase;
+  width: 100%;
+}

@@ -1,0 +1,289 @@
+.login {
+    width: 400px;
+}
+
+.g-bd {
+    width: 400px;
+    padding-bottom: 36px;
+    overflow: visible;
+}
+
+.w-exception-normal .cnt .note {
+    font-size: 18px;
+}
+
+.m-cnt {
+    padding: 0 30px;
+    width: 340px;
+}
+
+.headimg {
+    display: none;
+}
+
+.m-header {
+    padding: 0;
+    height: 32px;
+    margin: 0;
+}
+
+.m-footer {
+    display: none;
+}
+
+.fur-change-email {
+    height: 22px;
+    line-height: 22px;
+    font-size: 0;
+}
+
+.m-cnt .m-nerror .ferrortail, .m-cnt .m-nerror .ferrortail2, .m-cnt .m-nerror .ferrortail3 {
+    width: 16px !important;
+    height: 16px !important;
+    background: url("https://mimg.127.net/p/freemail/index/lib/img/urs/ico-error.png") no-repeat !important;
+}
+
+.u-loginbtn {
+    background: #299E59;
+    border-radius: 4px;
+}
+
+.u-loginbtn:hover {
+    background: #3EA86A;
+}
+
+.u-loginbtn:active {
+    color: white;
+    background: #23864C;
+}
+
+.w-exception,
+.w-exception-normal {
+    width: 400px;
+}
+
+.w-exception .cnt {
+    width: 340px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.w-exception-normal .cnt {
+    width: 340px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+input::-webkit-input-placeholder {
+    color: #DBDBDB;
+}
+
+input:-moz-placeholder {
+    color: #DBDBDB;
+}
+
+/* åå¤©å†…ç™»å½• */
+.m-cnt .m-unlogin .b-unlogn {
+    float: left;
+    border-right: none;
+    width: 110px;
+}
+
+.m-cnt .m-unlogin .b-unlogn label {
+    font-size: 14px;
+    color: #9095A2;
+    line-height: 18px;
+}
+
+.m-cnt .m-nerror {
+    margin-top: 12px;
+}
+
+.m-cnt .m-nerror .ferrorhead {
+    margin-left: 6px;
+    font-size: 12px;
+    color: #CC0000;
+}
+
+.m-cnt .u-input input {
+    width: 205px !important;
+    height: 46px;
+    line-height: 46px;
+}
+
+.m-cnt .u-pwdtext {
+    display: inherit !important;
+}
+
+.m-cnt .u-logo div {
+    margin-top: 12px;
+}
+
+.m-cnt .u-logo .u-logo-img1 {
+    background: url("https://mimg.127.net/p/freemail/index/lib/img/urs/ico-user.png") no-repeat; /* TODO: ä½¿ç”¨ç»å¯¹é“¾æŽ¥ */
+}
+
+.m-cnt .u-logo .u-logo-img2 {
+    background: url("https://mimg.127.net/p/freemail/index/lib/img/urs/ico-password.png") no-repeat; /* TODO: ä½¿ç”¨ç»å¯¹é“¾æŽ¥ */
+}
+
+.m-cnt .u-pwdshow {
+    right: 0;
+}
+
+.m-cnt .m-eye-close {
+    margin-right: 44px !important;
+}
+
+.m-cnt .m-unlogin .b-unlogn .u-checkbox {
+    width: 16px;
+    height: 16px;
+    border: 1px solid #D0D0D0;
+    border-radius: 2px;
+}
+
+.m-cnt .m-unlogin .b-unlogn .u-checkbox-select {
+    width: 16px;
+    height: 16px;
+    background: url("https://mimg.127.net/p/freemail/index/lib/img/urs/ico-checked.png") no-repeat;
+}
+
+.m-cnt #login-form .m-ckcnt {
+    margin-top: 22px;
+}
+
+/* è°ƒæ•´ç™»å½•æŒ‰é’® */
+.loginbox {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.loginbox .u-loginbtn {
+    position: absolute;
+    bottom: 0px;
+    width: 340px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 20px;
+    border: none;
+    /* margin-bottom: 36px; */
+}
+
+.m-cnt .m-unlogin {
+    padding-bottom: 42px;
+    font-size: 0;
+    height: 16px;
+    line-height: 16px;
+}
+
+/* å¿˜è®°å¯†ç  */
+.m-cnt .m-unlogin .forgetpwd {
+    float: right;
+    color: #299E59;
+    font-size: 14px;
+}
+
+/* åŽ»æ³¨å†ŒæŒ‰é’® */
+.m-cnt .m-unlogin .u-regbtn {
+    display: none;
+}
+
+.m-cnt .m-unlogin .u-regbtn.bgcolor {
+    position: absolute;
+    left: 168px;
+    bottom: -38px;
+    color: #299E59;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.m-cnt .m-unlogin .u-regbtn.bgcolor:hover {
+    color: #3EA86A;
+}
+
+.m-cnt .m-unlogin .u-regbtn.bgcolor:active {
+    color: #23864C;
+}
+
+.m-cnt .inputbox {
+    min-width: 340px;
+    height: 46px;
+    border-color: #DADADA;
+}
+
+.m-cnt .inputbox.active {
+    border-color: #EDF3FF;
+}
+
+
+/* å¿˜è®°å¯†ç æ ·å¼ */
+.m-cnt .m-unlogin .forgetpwd:hover {
+    color: #3EA86A;
+}
+
+.m-cnt .m-unlogin .forgetpwd:active {
+    color: #23864C;
+}
+
+.m-cnt .pr-domain {
+    color: #666;
+    right: -80px !important;
+}
+
+/* äºŒæ¬¡ç™»å½•é¡µé¢æŒ‰é’®æ ·å¼ä¿®æ”¹ */
+/* å·¦æŒ‰é’® */
+.u-btn.bgcolor {
+    height: 44px;
+    line-height: 44px;
+    color: #299E59;
+    border: 1px solid #a7d4bd;
+    border-radius: 4px;
+    background: #E6F3EC;
+}
+
+.u-btn.bgcolor:hover {
+    background: #3EA86A;
+}
+
+.u-btn.bgcolor:active {
+    background: #23864C;
+}
+
+/* å³æŒ‰é’® */
+.btncolor {
+    color: #fff;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background: #299E59;
+}
+
+.btncolor:hover {
+    background: #3EA86A;
+}
+
+.btncolor:active {
+    background: #23864C;
+}
+
+/* äºŒæ¬¡éªŒè¯ */
+.m-cnt .m-pcbox .m-pc {
+    min-width: auto;
+    width: 206px !important;
+}
+
+.m-cnt .m-pc .pcin {
+    width: 150px !important;
+}
+
+.m-cnt .pcbtn .getsmscode {
+    height: 48px;
+    line-height: 48px;
+}
+
+.m-cnt .m-ckcnt .inputbox {
+    min-width: auto;
+}
+
+.m-cnt #login-form .m-ckcnt input.cktext {
+    width: 130px !important;
+}

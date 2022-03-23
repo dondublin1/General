@@ -1,0 +1,93 @@
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table;
+}
+.clearfix:after {
+    clear: both;
+}
+.clearfix {
+    *zoom: 1;
+}
+
+html, body, div, span, applet, object, iframe,
+  h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+  a, abbr, acronym, address, big, cite, code,
+  del, dfn, em, img, ins, kbd, q, s, samp,
+  small, strike, strong, sub, sup, tt, var,
+  b, u, i, center,
+  dl, dt, dd, ol, ul, li,
+  fieldset, form, label, legend,
+  table, caption, tbody, tfoot, thead, tr, th, td,
+  article, aside, canvas, details, embed,
+  figure, figcaption, footer, header,
+  menu, nav, output, ruby, section, summary,
+  time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    outline:none;
+  }
+* { margin: 0; padding: 0; }
+
+body { background: #e5e5e5; text-align: center; font-family: 'Open Sans', arial, sans-serif; }
+
+b { font-weight: 700; }
+
+.container { display: block; width: 100%; margin: 50px 0; text-align: center; }
+
+.card { display: block; width: 400px; margin: 0 auto 50px; text-align: left; }
+
+.top { display: block; width: 100%; background: #fff; padding-top: 30px;}
+.top img { display: block; margin: 0 auto 20px; }
+.top h1 { display: block; font-size: 25px; font-weight: 700; color: #666; margin: 0 30px 10px; }
+.top span { display: block; margin: 0 30px 20px; font-size: 15px; line-height: 20px; color: #666; }
+.top span.error { color: #cc0000; text-align: center; }
+.top span.dispmsg { }
+
+a.pw { display: block; text-align: center; margin: 0 0 30px; color: #256672; font-size: 13px; text-decoration: none; }
+a.pw:hover { text-decoration: underline; }
+a.moble { display:block; text-align: center; margin: 0 0 5px; color: #256672; font-size: 13px; text-decoration: none; }
+a.moble:hover { text-decoration: underline; }
+#ajaxform { display: block; width: 340px; margin: 0 auto 20px; }
+#ajaxform input[type='text'] { display: block; outline:none; width: 340px; height: 40px; line-height: 40px; border: 2px solid #ccc; margin: 0 0 15px; font-size: 15px; text-indent: 15px; }
+#ajaxform input[type='password'] { display: block; outline:none; width: 340px; height: 40px; line-height: 40px; border: 2px solid #ccc; margin: 0 0 15px; font-size: 15px; text-indent: 15px; }
+#ajaxform input[type='submit'] { display: block; width: 340px; height: 40px; line-height: 40px; background: #256672; text-align: center; color: #fff; border: 0; font-size: 15px; font-weight: 700; }
+#ajaxform input[type='submit']:hover { cursor: pointer; background: #38818e; }
+#ajaxform input:focus { border: 1px solid #38818e; }
+
+.bottom { display: block; width: 100%; background: #f0f0f0; color: #828282; }
+.bottom p { display: block; margin: 40px; line-height: 20px; font-size: 14px; text-align: center; }
+
+.footer { width: 80%; margin: 0 auto; font-size: 12px; color: #6c6c6c; }
+.footer ul { list-style-type: none; width: auto; margin: 0 auto; }
+.footer ul li { display: inline-block; margin: 0 10px; }
+.footer ul li a { color: #6c6c6c; text-decoration: none; }
+.footer p { text-align: center; margin: 10px auto 0; }
+
+#signin-message {
+  height: 30px;
+  color: #DA4F49;
+  font-size:14px;
+  text-align: center;
+}
+
+#err {
+  height: 30px;
+  color: #DA4F49;
+}
+
+@media screen and (max-width: 400px) {
+  .container { margin: 10px 0 50px; min-width: 300px; }
+  .card { width: 95%; }
+  .top h1, .top span { width: 80%; margin: auto; }
+  #ajaxform { width: 80%; margin: 0 auto 20px; }
+  #ajaxform input[type='text'], #ajaxform input[type='submit'],#ajaxform input[type='password'] { width: 100%; box-sizing:border-box; -moz-box-sizing:border-box; -webkit-box-sizing:border-box; }
+  .top span { font-size: 13px; line-height: 18px; }
+  .bottom p { margin: 20px; font-size: 12px; line-height: 18px; }
+  #err {
+    height: 30px;
+    color: #DA4F49;
+  }
+}

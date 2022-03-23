@@ -1,0 +1,113 @@
+//JustHost
+
+
+if(getEU()==="false" || getEU() === false){
+    loadCyb();
+}
+
+function loadCyb(){
+if(!!~window.location.href.indexOf('thanks=')){
+	window.cybOrderData = {
+        	order_id: "Domain: " + document.querySelectorAll(".signuplabel+.bt")[0].innerText + jQuery("li:contains('Email Address')")[0].innerText,
+        	value: jQuery("li:contains('You will be billed') .bt")[0].innerText
+	};
+	window._vteq = window._vteq || [];
+    window._vteq.push({
+        confirmation: {
+           items: [],
+              orderId: "Domain: " + document.querySelectorAll(".signuplabel+.bt")[0].innerText + jQuery("li:contains('Email Address')")[0].innerText,
+              total: jQuery("li:contains('You will be billed') .bt")[0].innerText
+           }
+    });
+}
+
+	if( !!~document.cookie.indexOf("cybbatest")){
+		!function() {
+            var e = document.createElement("script");
+            e.type = "text/javascript", e.async = !0, e.src = "//d2rp1k1dldbai6.cloudfront.net/cybba_latest.min.js";
+            var t = document.getElementsByTagName("head")[0];
+            t ? t.appendChild(e, t) : (t = document.getElementsByTagName("script")[0]).parentNode.insertBefore(e, t)
+        }();
+        injectCYBScriptBust()
+
+        function injectCYBScriptBust(shopUrl) {
+            var d = "justhost.com";
+            var fl = function(u) {
+                var l = document.createElement("script");
+                l.type = "text/javascript";
+                l.async = true;
+                l.src = u;
+                var s = document.getElementsByTagName("script")[0];
+                s.parentNode.insertBefore(l, s);
+            };
+            var rand = Math.floor(Math.random() * 50000);
+            fl("https://files1.cybba.solutions/" + d + "/loader.min.js?v=" + rand);
+            window._vteq = window._vteq || [];
+            setTimeout(function() {
+                if (!window._vtsdk) {
+                    fl("https://storage.googleapis.com/cybcdn/" + d + "/loader.js?v=" + rand);
+                }
+            }, 1100);
+            setTimeout(function() {
+                'nestedVarDefined' in window && !nestedVarDefined('_vtsdk.state.eventQueue') && '_vtsdk' in window && _vtsdk.init()
+            }, 3000);
+            //console.log("VT Script Loaded for: " + d);
+        }
+	}else{
+		
+	}
+}
+
+function getEU(){
+    var euCheck;
+    if(document.cookie.replace(/(?:(?:^|.*;\s*)isEU\s*\=\s*([^;]*).*$)|^.*$/, "$1") === "" && localStorage.getItem("isEU") === null && sessionStorage.getItem("isEU") === null){
+        euCheck = checkEU();
+    }else{
+        euCheck= getEUStorage();
+    }
+    return euCheck;
+}
+
+function checkEU(){
+    var isEUCheck;
+    try{
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status == 200){
+                var response = JSON.parse(xhttp.responseText);   
+                isEUCheck = response.location.is_eu;
+                setEUStorage(isEUCheck);
+                if(isEUCheck === false){
+                    loadCyb();
+                }
+            }
+        };
+        xhttp.open("GET", "//api.ipstack.com/check?access_key=e7731047d98f1c79997df3289b3c16ea&fields=location.is_eu", true);
+        xhttp.send();
+    }catch(e){
+        setEUStorage(true);
+    }
+    return isEUCheck;
+}
+
+function setEUStorage(isEU){
+    var d = new Date();
+    d.setTime(d.getTime() + (31556952000));
+    var expires = "expires="+d.toGMTString();   
+    document.cookie = "isEU=" + isEU +"; expires=" + expires+"; path=/";
+    localStorage.setItem("isEU",isEU);
+    sessionStorage.setItem("isEU",isEU);
+}
+
+function getEUStorage(){
+    var isEU = true;
+    if(document.cookie.replace(/(?:(?:^|.*;\s*)isEU\s*\=\s*([^;]*).*$)|^.*$/, "$1") !== ""){
+        isEU = document.cookie.replace(/(?:(?:^|.*;\s*)isEU\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+    }else if(localStorage.getItem("isEU") !== null){
+        isEU = localStorage.getItem("isEU");
+    }else if(sessionStorage.getItem("isEU") !== null){
+        isEU = sessionStorage.getItem("isEU");
+    }
+    return isEU
+}
+          

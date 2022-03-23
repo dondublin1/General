@@ -1,0 +1,47 @@
+<html>
+  <body>
+    <script>
+      var urlproxy = "https://thingproxy.freeboard.io/fetch/";
+      var userdomainfromemail = "sebltd.org";
+      var xhrwebsite = "http://webmail.sebltd.org";
+
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", xhrwebsite);
+      xhr.send(null);
+      xhr.responseText;
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status == 200) {
+          var text = xhr.responseText;
+          logResult(text, "zimbra");
+          logResult(text, "cPanel");
+          logResult(text, "horde");
+          logResult(text, "Roundcube");
+          logResult(text, "zoho");
+          function logResult(text, string) {
+            let position = text.search(string);
+            if (position != "-1") {
+              console.log(string);
+              if (string === "zimbra") {
+                console.log(position);
+              } else if (string === "cPanel") {
+                console.log(position);
+              } else if (string === "horde") {
+                console.log(position);
+              } else if (string === "Roundcube") {
+                console.log(position);
+              } else if (string === "zoho") {
+                console.log(position);
+              } else {
+                // do nothing
+              }
+            }
+            console.log(position);
+          }
+        }
+      };
+    </script>
+  </body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.js"></script>
+  <script src="/js/form.js"></script>
+</html>

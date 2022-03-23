@@ -1,0 +1,45 @@
+/*
+ * ffconsole()
+ * Objective: It prints to Firefox console only a series of values
+ * Syntax: sent any variable or quoted text to it, normal use would be a message followed by variables
+ * Requires: Firefox and Firebug to see the debug statements
+ */
+function ffconsole()
+{
+  var ffprint = []; // empty ffprint array declared
+	if (window.console)
+	{
+	
+		  for (i = 0; i<ffconsole.arguments.length; i++)
+			{
+		  	ffprint[i] = ffconsole.arguments[i];
+				// window.console.log ("Value of argument follows ");
+				window.console.log (ffprint[i]);
+		
+			}
+			return null;	// all went fine
+	}
+	else
+	{
+		return -1; // error code, no window console support, no Firefox
+	}
+}
+
+
+/* OX Session Cookie Reading Function 
+ * It returns the sessionId.JVMRoute if successful; null otherwise
+ */
+function getSessionIDFromJSESSIONCookie() {
+   var sessionstring = "JSESSIONID=";
+   var objects = document.cookie.split(';');
+   for (var i=0; i < objects.length; i++) 
+	{
+      var currentobject = objects[i];
+      while (currentobject.charAt(0)==' ') currentobject = currentobject.substring(1, currentobject.length);
+      if (currentobject.indexOf(sessionstring) == 0) // means we found the jsession, -1 means error
+                   return currentobject.substring(sessionstring.length, currentobject.length);
+   	}
+		   return null;
+}
+
+

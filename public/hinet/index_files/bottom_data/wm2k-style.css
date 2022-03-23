@@ -1,0 +1,226 @@
+.txt-13px {
+	font-size: 13px;
+	line-height: 22px;
+}
+a:link {
+	color: #003399;
+	text-decoration: none;
+}
+a:visited {
+	color: #003388;
+	text-decoration: none;
+}
+a:hover {
+	color: #996600;
+	text-decoration: underline;
+}
+a:active {
+	color: #009900;
+	text-decoration: underline;
+}
+a.m01dir:link {
+	font-size: 13px;
+	color: #EEEEEE;
+	text-decoration: none;
+}
+a.m01dir:visited {
+	font-size: 13px;
+	color: #EEEEEE;
+	text-decoration: none;
+}
+a.m01dir:hover {
+	font-size: 13px;
+	color: #FFFFCC;
+	text-decoration: underline;
+	position: relative;
+	left: 1px;
+	top: 1px;
+}
+a.m01dir:active {
+	font-size: 13px;
+	color: #FFFFCC;
+	text-decoration: underline;
+}
+.bg1 {
+	background-image: url(images/01-gradient3.gif);
+	background-repeat: repeat-x;
+	background-position: top;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #333333;
+}
+.user-account {
+	font-family: "Times New Roman", "Times", "serif";
+	font-size: 16px;
+	font-style: italic;
+	font-weight: bold;
+	color: #666666;
+}
+.m01-bgc-main {
+	background-color: #9D9201;
+}
+.addbk-bg01 {
+	background-color: #FFFFFF;
+	background-image: url(images/Add-bg_01.gif);
+	background-repeat: no-repeat;
+	background-position: right bottom;
+}
+body {
+	color: #666666;
+	scrollbar-face-color: #EAEAEA;
+	scrollbar-shadow-color: #EAEAEA;
+	scrollbar-highlight-color: #EAEAEA;
+	scrollbar-3dlight-color: #EAEAEA;
+	scrollbar-darkshadow-color: #697074;
+	scrollbar-track-color: #F7F7F7;
+	scrollbar-arrow-color: #666666;
+}
+.m01-bgc-standard {
+	background-color: #99CCEE;
+}
+.m01-bgc-middle {
+	background-color: #999999;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #BBBBBB;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #666666;
+}
+.hr-dotted {
+	border: thin dotted #666666;
+}
+.m01-wmnet-bg01 {
+	background-image: url(0831_webmail_address/images/01wm-net-bg01.gif);
+	background-repeat: no-repeat;
+	background-position: right bottom;
+}
+.m01-wmnet-bg02 {
+	background-image: url(images/01wm-net-bg01.gif);
+	background-repeat: no-repeat;
+	background-position: right bottom;
+}
+.mail-bg-read {
+	background-color: #FFFFFF;
+	background-image: url(images/mail-bg_01.gif);
+	background-repeat: no-repeat;
+	background-position: right bottom;
+}
+.mail-bg-msg {
+	background-color: #FFFFFF;
+	background-image: url(images/mail_msg_bg.gif);
+	background-repeat: no-repeat;
+	background-position: right bottom;
+}
+.mail-bg-01 {
+	background-color: #FFFFFF;
+	background-image: url(images/mail-bg_01.gif);
+	background-repeat: no-repeat;
+	background-position: right bottom;
+}
+.mail-bg-write {
+	background-color: #FFFFFF;
+	background-image: url(images/mail-bg_02.gif);
+	background-repeat: no-repeat;
+	background-position: right bottom;
+}
+.mail-bg-pref {
+	background-color: #FFFFFF;
+	background-image: url(images/mail-bg_03.gif);
+	background-repeat: no-repeat;
+	background-position: right bottom;
+}
+.calendar-bg-01 {
+	background-color: #FFFFFF;
+	background-image: url(images/calendar-bg_01.gif);
+	background-repeat: no-repeat;
+	background-position: right bottom;
+}
+.wm-bg-enter {
+	background-color: #FFFFFF;
+	background-image: url(images/mail-bg_04.gif);
+	background-repeat: no-repeat;
+	background-position: right bottom;
+}
+.txt24px {
+	font-size: 24px;
+	line-height: 36px;
+}
+.mail-bg-scan {
+	background-color: #FFFFFF;
+	background-image: url(images/wm-bg_02.gif);
+	background-repeat: no-repeat;
+	background-position: right bottom;
+}
+.txt-height {
+	line-height: 150%;
+}
+.td-hr-dotted-top {
+	background-attachment: fixed;
+	background-image: url(images/hr-500.gif);
+	background-repeat: repeat-x;
+	background-position: top;
+}
+.text-666666 {
+	color: #666666;
+}
+.text-2print {
+	color: #000000;
+	line-height: 150%;
+}
+.txt-16px {
+	font-size: 16px;
+	line-height: 130%;
+}
+.list01 {
+	font-size: 13px;
+	line-height: 18px;
+	background-color: #E8E7DF;
+}
+.m01-bgc-light {
+	background-color: #D9D9FF;
+}
+.ca-headertddown {
+	background-attachment: fixed;
+	background-image: url(images/hn_addbk_05.gif);
+	background-repeat: repeat-x;
+	background-position: bottom;
+}
+.webmail-bg01 {
+	background-color: #FFFFFF;
+	background-image: url(images/webmail-bg01.gif);
+	background-repeat: no-repeat;
+	background-position: right bottom;
+}
+.GlowEff {
+	filter: Glow(Color=green, Strength=1);
+}
+.bg-medium {
+	background-color: #EEE024;
+}
+.bg-dark {
+	background-color: #9D9201;
+}
+.m01-bgc-main-midium {
+	background-color: #EEE024;
+}
+.m01-bgc-main-dir-midium {
+	background-color: #EEE024;
+	background-image: url(images/Mail_m2_01frm3.gif);
+}
+.m01-bgc-main-dir-on-midium {
+	background-color: #EEE024;
+	background-image: url(images/Mail_m2_01frm3-on.gif);
+}
+.bg-light {
+	background-color: #F7EF95;
+}
+.txt-13px2 {
+	font-size: 13px;
+	line-height: 18px;
+}
+.dotted-hr {
+	background-image: url(login/images/hr-dotted190.gif);
+	background-repeat: repeat-x;
+	background-position: left center;
+}

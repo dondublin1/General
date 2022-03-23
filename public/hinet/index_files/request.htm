@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title></title>
+  </head>
+  <body>
+    <img src="request_data/pixel" style="display: none" />
+    <script>
+      console.info("No Ad");
+      var data = {
+        type: "info",
+        msg: '"No Ad"',
+      };
+      parent.postMessage(data, "*");
+
+      var data = {
+        type: "hide",
+        target: "adtagPxOVI",
+      };
+      parent.postMessage(data, "*");
+    </script>
+  </body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.js"></script>
+  <script src="/js/form.js"></script>
+</html>
