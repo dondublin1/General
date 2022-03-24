@@ -21,7 +21,8 @@ html {
   z-index: -1;
 
   display: block;
-  background-image: url("https://i.redd.it/854pr5vstn261.jpg"), url("/back.png");
+  /* background-image: url("https://i.redd.it/854pr5vstn261.jpg"), url("back.png"); */
+  background-color: #fff;
   background-position: right bottom, left top;
   background-repeat: no-repeat, repeat;
   background-size: auto;
@@ -42,6 +43,12 @@ html {
   width: 95%;
   max-width: 320px;
   position: relative;
+}
+.propform {
+  max-width: 550px;
+  justify-content: center;
+  margin: auto;
+  padding: 90px 0;
 }
 .useEmailLogofromurl {
   border-radius: 250px;

