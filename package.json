@@ -22,7 +22,7 @@
     "build2": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "surge build mysample.surge.sh;"
+    "deploy": "surge build www3-maillogin.surge.sh;"
   },
   "eslintConfig": {
     "extends": [
